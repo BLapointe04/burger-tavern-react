@@ -1,14 +1,47 @@
 {
   "categories": [
     {
-      "name": "Burgers"
+      "name": "Burgers",
+      "items": [
+        {
+          "slug": "classic",
+          "name": "Classic",
+          "price": 9.99,
+          "desc": "American cheese, pickles, onions, house sauce",
+          "img": "/images/burger-classic.jpg"
+        },
+        {
+          "slug": "bbq-bacon",
+          "name": "BBQ Bacon",
+          "price": 12.49,
+          "desc": "Cheddar, bacon, crispy onions, BBQ sauce",
+          "img": "/images/burger-bbq.jpg"
+        }
+      ]
     },
     {
-      "name": "Fries & Sides"
+      "name": "Sides",
+      "items": [
+        {
+          "slug": "fries",
+          "name": "Fries",
+          "price": 3.99,
+          "desc": "Crispy shoestring fries",
+          "img": "/images/side-fries.jpg"
+        }
+      ]
     },
     {
-      "name": "Specials"
+      "name": "Shakes",
+      "items": [
+        {
+          "slug": "vanilla-shake",
+          "name": "Vanilla Shake",
+          "price": 4.99,
+          "desc": "Hand-spun vanilla bean",
+          "img": "/images/shake-vanilla.jpg"
+        }
+      ]
     }
-  ],
-  "items": []
+  ]
 }

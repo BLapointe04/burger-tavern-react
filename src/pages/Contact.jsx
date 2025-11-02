@@ -1,39 +1,66 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/yourid" 
 
 export default function Contact(){
+  const [status, setStatus] = useState({ state: 'idle', msg: '' })
+
+  async function onSubmit(e){
+    e.preventDefault()
+    const form = new FormData(e.currentTarget)
+    setStatus({ state: 'loading', msg: '' })
+    try{
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: form
+      })
+      if(res.ok){
+        setStatus({ state: 'success', msg: 'Thanks! We’ll be in touch soon.' })
+        e.currentTarget.reset()
+      } else {
+        setStatus({ state: 'error', msg: 'Something went wrong. Please try again.' })
+      }
+    } catch {
+      setStatus({ state: 'error', msg: 'Network error. Try again later.' })
+    }
+  }
+
   return (
     <section className="grid grid-2">
       <div className="card">
         <h2>Contact Us</h2>
-        <p>Have a question or want to place a large order? (Forms not required in this part.)</p>
-        <form onSubmit={(e)=>e.preventDefault()}>
-          <label htmlFor="fullname">Full Name</label>
-          <input className="input" id="fullname" name="fullname" required minLength={2} placeholder="Jane Doe" />
+        <form onSubmit={onSubmit} noValidate>
+          <label>Full Name</label>
+          <input className="input" name="name" required placeholder="Jane Doe"/>
 
-          <label htmlFor="email">Email</label>
-          <input className="input" id="email" name="email" type="email" required placeholder="you@example.com" />
+          <label>Email</label>
+          <input className="input" name="email" type="email" required placeholder="you@example.com"/>
 
-          <label htmlFor="message">Message</label>
-          <textarea className="input" id="message" name="message" rows={5} required placeholder="How can we help?" />
+          <label>Message</label>
+          <textarea className="input" name="message" required minLength={10} placeholder="How can we help?"></textarea>
 
-          <button className="btn" type="submit">Send</button>
+          <button className="btn" type="submit" disabled={status.state === 'loading'}>
+            {status.state === 'loading' ? 'Sending…' : 'Send'}
+          </button>
+
+          {status.state === 'success' && <p className="contact__success">{status.msg}</p>}
+          {status.state === 'error' && <p className="contact__error">{status.msg}</p>}
         </form>
       </div>
+
       <div className="card">
-        <h2>Reviews</h2>
-        <div style={{marginBottom: 16}}>
-          <blockquote><p>“Best smash burger in town.”</p><cite>— Taylor</cite></blockquote>
-          <blockquote><p>“Curly fries are perfect.”</p><cite>— Jordan</cite></blockquote>
-          <blockquote><p>“Quick pickup, still hot.”</p><cite>— Casey</cite></blockquote>
-        </div>
-        <div className="ratio-16x9" style={{marginTop: 16}}>
+        <h3>Visit Us</h3>
+        <p>123 Smash Lane, Columbia, SC</p>
+        <div className="ratio-16x9">
           <iframe
             className="img-cover"
             style={{border: 0}}
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="Our Kitchen"
+            src="https://www.google.com/maps?q=columbia+sc&output=embed"
+            title="location"
             loading="lazy"
-            allowFullScreen/>
+            allowFullScreen
+          />
         </div>
       </div>
     </section>
