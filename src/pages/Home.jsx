@@ -1,4 +1,5 @@
 import React from 'react'
+import SlideShow from '../components/SlideShow.jsx'
 
 export default function Home(){
   return (
