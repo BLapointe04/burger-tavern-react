@@ -4,6 +4,13 @@ import SlideShow from '../components/SlideShow.jsx'
 export default function Home(){
   return (
     <>
+      {/* ✅ Slideshow at the top */}
+      <SlideShow images={[
+        { src: 'https://picsum.photos/id/1080/1200/500', alt: 'Signature burger' },
+        { src: 'https://picsum.photos/id/1081/1200/500', alt: 'Fries and sauces' },
+        { src: 'https://picsum.photos/id/1060/1200/500', alt: 'Hand-spun shakes' },
+      ]} />
+
       <section className="hero">
         <div>
           <h1>Smash Burgers. Simple Ingredients. Big Flavor.</h1>
