@@ -1,16 +1,16 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import Navbar from './components/Navbar.jsx'
-import Footer from './components/Footer.jsx'
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
+import "./styles/base.css";
 
-export default function App(){
+export default function App() {
   return (
-    <div className="app-shell">
+    <>
       <Navbar />
-      <main className="container">
+      <main className="container" style={{ paddingBottom: 32 }}>
         <Outlet />
       </main>
       <Footer />
-    </div>
-  )
+    </>
+  );
 }

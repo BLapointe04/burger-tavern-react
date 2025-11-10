@@ -1,35 +1,30 @@
-import React from 'react'
-import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import App from './App.jsx'
-import './styles/base.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./App.jsx";
 
-import Home from './pages/Home.jsx'
-import Menu from './pages/Menu.jsx'
-import About from './pages/About.jsx'
-import Contact from './pages/Contact.jsx'
-import Order from './pages/Order.jsx'
-import Item from './pages/Item.jsx'
+import Home from "./pages/Home.jsx";
+import Menu from "./pages/Menu.jsx";
+import Item from "./pages/Item.jsx";
+import About from "./pages/About.jsx";
+import Contact from "./pages/Contact.jsx";
+import Order from "./pages/Order.jsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/burger-tavern-react/",
     element: <App />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'menu', element: <Menu /> },
-      { path: 'about', element: <About /> },
-      { path: 'contact', element: <Contact /> },
-      { path: 'order', element: <Order /> },
-      { path: 'item/:slug', element: <Item /> },
-    ]
-  }
-], {
-  basename: import.meta.env.BASE_URL
-})
+      { path: "menu", element: <Menu /> },
+      { path: "item/:slug", element: <Item /> },
+      { path: "about", element: <About /> },
+      { path: "contact", element: <Contact /> },
+      { path: "order", element: <Order /> },
+    ],
+  },
+]);
 
-createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-)
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <RouterProvider router={router} />
+);
