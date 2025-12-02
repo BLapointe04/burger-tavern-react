@@ -1,15 +1,13 @@
-import { NavLink } from "react-router-dom";
+import React from "react";
+import "./Footer.css";
 
-export default function Footer(){
+export default function Footer() {
   return (
-    <footer className="footer">
-      <div className="container" style={{display:"flex", justifyContent:"space-between"}}>
-        <span>© The Burger Tavern</span>
-        <span>
-          <NavLink to="contact">Contact &amp; Reviews</NavLink> ·{" "}
-          <NavLink to="about">About</NavLink>
-        </span>
-      </div>
+    <footer className="site-footer">
+      <p>© The Burger Tavern</p>
+      <nav>
+        <a href="#/contact">Contact & Reviews</a> • <a href="#/about">About</a>
+      </nav>
     </footer>
   );
 }

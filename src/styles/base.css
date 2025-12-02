@@ -166,3 +166,20 @@ footer a:hover{ text-decoration: underline; }
 .contact__success{color:#0a7f2e;font-weight:600;margin-top:.5rem}
 .contact__error{color:#b00020;font-weight:600;margin-top:.5rem}
 
+.site-footer {
+  padding: 20px 0;
+  text-align: center;
+  background: #f6efeb;
+  color: #444;
+  margin-top: 40px;
+}
+
+.site-footer nav a {
+  color: #333;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.site-footer nav a:hover {
+  text-decoration: underline;
+}

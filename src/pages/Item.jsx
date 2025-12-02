@@ -1,37 +1,52 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import API_BASE from "../api";
-import "../styles/ItemModal.css";
+import API_BASE from "../api.js";
+import "./Item.css";
 
-export default function Item(){
+export default function Item() {
   const { slug } = useParams();
   const [item, setItem] = useState(null);
-  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    (async () => {
+    const fetchItem = async () => {
       try {
-        const r = await fetch(`${API_BASE}/api/items/${slug}`);
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        setItem(await r.json());
-      } catch (e) {
-        setErr("Could not load item.");
+        const res = await fetch(`${API_BASE}/api/items/${slug}`);
+        if (!res.ok) throw new Error("Failed to load item");
+        const data = await res.json();
+        setItem(data);
+      } catch (err) {
+        setError("Could not load item.");
+      } finally {
+        setLoading(false);
       }
-    })();
+    };
+
+    fetchItem();
   }, [slug]);
 
-  if (err) return <p className="error">{err}</p>;
-  if (!item) return <p>Loading…</p>;
+  if (loading) return <p>Loading…</p>;
+  if (error) return <p className="error">{error}</p>;
+  if (!item) return <p>Item not found.</p>;
 
   return (
-    <div className="page-wrap">
-      <Link to="/burger-tavern-react/menu" className="btn" style={{ marginBottom: 16 }}>← Back to Menu</Link>
-      <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", gap: 18 }}>
-        <div className="ratio-1x1"><img className="img-cover" src={item.image} alt={item.name} /></div>
-        <div className="card">
+    <div className="item-page">
+      <Link to="/menu" className="btn btn-outline" style={{ marginBottom: "20px" }}>
+        ← Back to Menu
+      </Link>
+
+      <div className="item-detail">
+        <img src={item.image} alt={item.name} className="item-img" />
+
+        <div className="item-info">
           <h1>{item.name}</h1>
-          <p>{item.desc || item.subtitle}</p>
-          <div className="price">{item.price}</div>
+          {item.price && <p className="price">{item.price}</p>}
+          <p>{item.desc}</p>
+
+          <Link to={`/edit/${item.slug}`} className="btn btn-secondary">
+            Edit Item
+          </Link>
         </div>
       </div>
     </div>
