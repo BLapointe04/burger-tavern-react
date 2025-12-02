@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
+
 import App from "./App.jsx";
 
 import Home from "./pages/Home.jsx";
@@ -10,21 +11,19 @@ import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import Order from "./pages/Order.jsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/burger-tavern-react/",
-    element: <App />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: "menu", element: <Menu /> },
-      { path: "item/:slug", element: <Item /> },
-      { path: "about", element: <About /> },
-      { path: "contact", element: <Contact /> },
-      { path: "order", element: <Order /> },
-    ],
-  },
-]);
-
+// HashRouter should FIX ALL 404 ERRORS on GitHub Pages
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <React.StrictMode>
+    <HashRouter>
+      <App />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/item/:slug" element={<Item />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/order" element={<Order />} />
+      </Routes>
+    </HashRouter>
+  </React.StrictMode>
 );
