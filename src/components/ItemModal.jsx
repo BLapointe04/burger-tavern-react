@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ItemModal.css";
-import EditItemForm from "./EditItemForm";
+import EditItemForm from "../pages/EditItemForm";
 import { updateItem, deleteItem } from "../api";
 
 export default function ItemModal({ item, onClose, onUpdated, onDeleted }) {
