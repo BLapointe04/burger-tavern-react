@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import API_BASE from "../api.js";
-import "./EditItemForm.css";
+import "../styles/EditItemForm.css";
 
 export default function EditItemForm() {
   const { slug } = useParams();
