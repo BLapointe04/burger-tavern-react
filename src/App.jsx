@@ -4,8 +4,12 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 
-import "./styles/base.css"; // adjust if your main stylesheet is named differently
-
+import "./styles/base.css";
+import "./styles/Menu.css";
+import "./styles/Item.css";
+import "./styles/ItemModal.css";
+import "./styles/MenuItemCard.css";
+import "./styles/EditItemForm.css"; 
 export default function App() {
   return (
     <div className="app-shell">
