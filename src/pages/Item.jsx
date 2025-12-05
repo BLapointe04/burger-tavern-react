@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import API_BASE from "../api.js";
-import "./Item.css";
+import "../styles/Item.css";
 
 export default function Item() {
   const { slug } = useParams();

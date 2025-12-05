@@ -60,9 +60,7 @@ main { flex: 1; }
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
 }
 
-/* ----------------------------------------
-   NAVBAR (FIXED + CLEAN)
----------------------------------------- */
+
 header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
