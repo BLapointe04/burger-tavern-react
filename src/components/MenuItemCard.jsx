@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "..styles/MenuItemCard.css";
+import "../styles/MenuItemCard.css";
 
 export default function MenuItemCard({ item, onDelete }) {
   if (!item) return null;
