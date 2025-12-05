@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./ItemModal.css";
+import "../styles/ItemModal.css";
 import EditItemForm from "../pages/EditItemForm";
 import { updateItem, deleteItem } from "../api";
 
