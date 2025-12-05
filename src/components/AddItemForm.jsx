@@ -2,12 +2,13 @@ import { useState } from "react";
 import Joi from "joi";
 import API_BASE from "../api";
 
+// Price regex: 9.99 or $9.99
 const priceRegex = /^\$?\d+(\.\d{2})?$/;
 
 const schema = Joi.object({
   name: Joi.string().min(2).max(80).required(),
   desc: Joi.string().min(2).max(300).required(),
-  image: Joi.string().uri().required(),
+  imageUrl: Joi.string().uri().required(),   // <-- FIXED
   price: Joi.string().pattern(priceRegex).required(),
   category: Joi.string().valid("burgers", "sides", "specials").required(),
 });
@@ -16,10 +17,11 @@ export default function AddItemForm({ onAdded }) {
   const [form, setForm] = useState({
     name: "",
     desc: "",
-    image: "",
+    imageUrl: "",        // <-- FIXED
     price: "",
     category: "burgers",
   });
+
   const [errors, setErrors] = useState([]);
   const [status, setStatus] = useState("");
 
@@ -34,7 +36,7 @@ export default function AddItemForm({ onAdded }) {
 
     const { error } = schema.validate(form, { abortEarly: false });
     if (error) {
-      setErrors(error.details.map(d => d.message));
+      setErrors(error.details.map((d) => d.message));
       return;
     }
 
@@ -60,13 +62,13 @@ export default function AddItemForm({ onAdded }) {
       }
 
       setStatus("Item added!");
-      setForm(f => ({
-        ...f,
+      setForm({
         name: "",
         desc: "",
-        image: "",
+        imageUrl: "",
         price: "",
-      }));
+        category: "burgers",
+      });
 
       setTimeout(() => setStatus(""), 2000);
     } catch {
@@ -81,12 +83,7 @@ export default function AddItemForm({ onAdded }) {
       <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         <label>
           <div>Name</div>
-          <input
-            name="name"
-            value={form.name}
-            onChange={update}
-            required
-          />
+          <input name="name" value={form.name} onChange={update} required />
         </label>
 
         <label>
@@ -114,8 +111,8 @@ export default function AddItemForm({ onAdded }) {
         <label style={{ gridColumn: "1 / -1" }}>
           <div>Image URL</div>
           <input
-            name="image"
-            value={form.image}
+            name="imageUrl"   // <-- FIXED
+            value={form.imageUrl}
             onChange={update}
             placeholder="https://..."
             required
@@ -124,28 +121,40 @@ export default function AddItemForm({ onAdded }) {
 
         <label>
           <div>Category</div>
-          <select
-            name="category"
-            value={form.category}
-            onChange={update}
-          >
+          <select name="category" value={form.category} onChange={update}>
             <option value="burgers">Burgers</option>
-            <option value="sides">Fries &amp; Sides</option>
+            <option value="sides">Fries & Sides</option>
             <option value="specials">Specials</option>
           </select>
         </label>
       </div>
 
       {errors.length > 0 && (
-        <ul className="card" style={{ marginTop: 12, background: "#fff4f4", border: "1px solid #f8c2c2" }}>
+        <ul
+          className="card"
+          style={{
+            marginTop: 12,
+            background: "#fff4f4",
+            border: "1px solid #f8c2c2",
+          }}
+        >
           {errors.map((msg, i) => (
-            <li key={i} style={{ color: "#b00020" }}>{msg}</li>
+            <li key={i} style={{ color: "#b00020" }}>
+              {msg}
+            </li>
           ))}
         </ul>
       )}
 
       {status && (
-        <p className="card" style={{ marginTop: 12, background: "#e6f7ed", border: "1px solid #b6e3c6" }}>
+        <p
+          className="card"
+          style={{
+            marginTop: 12,
+            background: "#e6f7ed",
+            border: "1px solid #b6e3c6",
+          }}
+        >
           {status}
         </p>
       )}
